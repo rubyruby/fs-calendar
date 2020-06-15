@@ -13,8 +13,11 @@ html
       .navbar-menu
         .navbar-end
           - if user_signed_in?
-            = link_to t('devise.shared.links.sign_out'), destroy_user_session_path,
-                    class: 'navbar-item', method: :delete
+            .navbar-item.has-dropdown
+              .navbar-link= current_user.email
+              .navbar-dropdown
+                = link_to t('devise.shared.links.sign_out'), destroy_user_session_path,
+                        class: 'navbar-item', method: :delete
           - else
             = link_to t("devise.shared.links.sign_in"), new_user_session_path,
                     class: ['navbar-item', controller_name == 'sessions' && 'is-active']

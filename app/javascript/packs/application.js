@@ -1,5 +1,7 @@
 import "../stylesheets/application.scss";
 
+import "./navbar/dropdown";
+
 require("@rails/ujs").start()
 
 
