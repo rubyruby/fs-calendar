@@ -3,9 +3,28 @@ html
   head
     title
       | Calendar of events
+    meta[name="viewport" content="width=device-width, initial-scale=1"]
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag 'application', media: 'all'
+    = stylesheet_pack_tag 'application', media: 'all'
     = javascript_pack_tag 'application'
   body
+    nav.navbar.is-light[aria-label="main navigation" role="navigation"]
+      .navbar-menu
+        .navbar-end
+          - if user_signed_in?
+            = link_to t('devise.shared.links.sign_out'), destroy_user_session_path,
+                    class: 'navbar-item', method: :delete
+          - else
+            = link_to t("devise.shared.links.sign_in"), new_user_session_path,
+                    class: ['navbar-item', controller_name == 'sessions' && 'is-active']
+            = link_to t("devise.shared.links.sign_up"), new_user_registration_path,
+                    class: ['navbar-item', controller_name == 'registrations' && 'is-active']
+
+    .container.is-fluid
+      - if notice
+        .notification.is-success.mt-4= notice
+      - if alert
+        .notification.is-danger.mt-4= alert
+
     = yield
