@@ -1,0 +1,18 @@
+nav.navbar.is-light[aria-label="main navigation" role="navigation"]
+  a.navbar-burger[role="button" data-target="topMenu" aria-label="menu" aria-expanded="false"]
+    span[aria-hidden="true"]
+    span[aria-hidden="true"]
+    span[aria-hidden="true"]
+  .navbar-menu#topMenu
+    .navbar-end
+      - if user_signed_in?
+        .navbar-item.has-dropdown
+          .navbar-link= current_user.email
+          .navbar-dropdown
+            = link_to t('devise.shared.links.sign_out'), destroy_user_session_path,
+                    class: 'navbar-item', method: :delete
+      - else
+        = link_to t("devise.shared.links.sign_in"), new_user_session_path,
+                class: ['navbar-item', controller_name == 'sessions' && 'is-active']
+        = link_to t("devise.shared.links.sign_up"), new_user_registration_path,
+                class: ['navbar-item', controller_name == 'registrations' && 'is-active']
