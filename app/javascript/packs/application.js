@@ -1,6 +1,7 @@
 import "../stylesheets/application.scss";
 
 import "./navbar";
+import "./notification";
 
 require("@rails/ujs").start()
 

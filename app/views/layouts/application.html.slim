@@ -13,8 +13,11 @@ html
 
     .container.is-fluid
       - if notice
-        .notification.is-success.mt-4= notice
+        = notification('is-success mt-4') do
+          = notice
       - if alert
-        .notification.is-danger.mt-4= alert
+        = notification('is-danger mt-4') do
+          = alert
 
-    = yield
+    .section
+      = yield
