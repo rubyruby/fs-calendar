@@ -20,12 +20,12 @@
           .field
             = f.label :full_name, class: 'label'
             .control
-              = f.password_field :full_name,
+              = f.text_field :full_name,
                       class: ["input", resource.errors.key?(:full_name) && "is-danger"]
             = form_field_errors(resource, :full_name)
 
           .field
             .control
-            = f.submit t('.sign_up'), class: "button is-primary is-fullwidth"
+              = f.submit t('.sign_up'), class: "button is-primary is-fullwidth"
 
         = render "devise/shared/links"

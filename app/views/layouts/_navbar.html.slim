@@ -9,6 +9,8 @@ nav.navbar.is-light[aria-label="main navigation" role="navigation"]
         .navbar-item.has-dropdown
           .navbar-link= current_user.email
           .navbar-dropdown
+            = link_to t("devise.registrations.edit.title"), edit_user_registration_path, class: 'navbar-item'
+            hr.navbar-divider
             = link_to t('devise.shared.links.sign_out'), destroy_user_session_path,
                     class: 'navbar-item', method: :delete
       - else
