@@ -2,15 +2,11 @@
   .column.is-narrow
     .box
       = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-        .field
-          = f.label :email, class: 'label'
-          .control
-            = f.text_field :email, autofocus: true, class: 'input', autocomplete: "email"
+        = form_field(resource, :email) do
+          = f.text_field :email, autofocus: true, class: 'input', autocomplete: "email"
 
-        .field
-          = f.label :password, class: 'label'
-          .control
-            = f.password_field :password, class: 'input'
+        = form_field(resource, :password) do
+          = f.password_field :password, class: 'input'
 
         - if devise_mapping.rememberable?
           .field
