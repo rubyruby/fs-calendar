@@ -1,0 +1,41 @@
+= form_for @event do |f|
+  .field
+    = f.label :title, class: 'label'
+    .control
+      = f.text_field :title,
+              class: ['input', @event.errors.key?(:title) && 'is-danger']
+    = form_field_errors(@event, :title)
+
+  .field
+    = f.label :start_date, class: 'label'
+    .control
+      .field.has-addons.has-addons-fullwidth
+        .control
+          .select.is-fullwidth
+            = select_year @event.start_date, {}, name: "event[start_date(1i)]",
+                    class: [@event.errors.key?(:start_date) && 'is-danger']
+        .control
+          .select.is-fullwidth
+            = select_month @event.start_date, {}, name: "event[start_date(2i)]",
+                    class: [@event.errors.key?(:start_date) && 'is-danger']
+        .control
+          .select.is-fullwidth
+            = select_day @event.start_date, {}, name: "event[start_date(3i)]",
+                    class: [@event.errors.key?(:start_date) && 'is-danger']
+    = form_field_errors(@event, :start_date)
+
+
+  .field
+    = f.label :periodicity, class: 'label'
+    .control
+      .select.is-fullwidth
+        = f.select :periodicity, Event.periodicity.options,
+                class: (@event.errors.key?(:periodicity) && 'is-danger')
+    = form_field_errors(@event, :periodicity)
+
+  hr
+  .field.is-grouped.is-grouped-right
+    .control
+      = link_to t('shared.back'), :back, class: "button"
+    .control
+      = f.submit t('.save'), class: "button is-primary"

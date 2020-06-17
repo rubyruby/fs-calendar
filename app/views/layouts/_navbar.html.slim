@@ -6,7 +6,7 @@ nav.navbar.is-light[aria-label="main navigation" role="navigation"]
   .navbar-menu#topMenu
     - if user_signed_in?
       .navbar-start
-        = link_to "Calendar", events_path,
+        = link_to t('.calendar'), events_path,
                 class: ['navbar-item', controller_name == 'events' && 'is-active']
     .navbar-end
       - if user_signed_in?

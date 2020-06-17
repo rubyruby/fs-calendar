@@ -1,20 +1,24 @@
-.columns.is-centered
-  .column.is-narrow
-    .field.has-addons.js-calendar-date-selector
-      .control
-        = link_to events_path(date: @date - 1.month), class: 'button' do
-          span.icon
-            i.fas.fa-chevron-left
-      .control
-        .select
-          = select_month(@date)
-      .control
-        .select
-          = select_year(@date)
-      .control
-        = link_to events_path(date: @date + 1.month), class: 'button' do
-          span.icon
-            i.fas.fa-chevron-right
+.level
+  .level-left
+    .level-item
+      .field.has-addons.js-calendar-date-selector
+        .control
+          = link_to events_path(date: @date - 1.month), class: 'button' do
+            span.icon
+              i.fas.fa-chevron-left
+        .control
+          .select
+            = select_month(@date)
+        .control
+          .select
+            = select_year(@date)
+        .control
+          = link_to events_path(date: @date + 1.month), class: 'button' do
+            span.icon
+              i.fas.fa-chevron-right
+  .level-right
+    .level-item
+      = link_to t('.add'), new_event_path, class: 'button is-primary'
 
 - @days.each_slice(7) do |week|
   .columns
