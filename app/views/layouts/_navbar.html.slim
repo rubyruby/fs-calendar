@@ -4,6 +4,10 @@ nav.navbar.is-light[aria-label="main navigation" role="navigation"]
     span[aria-hidden="true"]
     span[aria-hidden="true"]
   .navbar-menu#topMenu
+    - if user_signed_in?
+      .navbar-start
+        = link_to "Calendar", events_path,
+                class: ['navbar-item', controller_name == 'events' && 'is-active']
     .navbar-end
       - if user_signed_in?
         .navbar-item.has-dropdown

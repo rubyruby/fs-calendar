@@ -10,6 +10,8 @@ Rails.application.routes.draw do
              as: :user_registration
   end
 
-  root to: 'home#index'
+  resources :events, only: [:index]
+
+  root to: 'events#index'
 
 end

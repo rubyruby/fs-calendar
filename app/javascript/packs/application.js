@@ -1,7 +1,10 @@
+import "@fortawesome/fontawesome-free/js/all"
+
 import "../stylesheets/application.scss";
 
 import "./navbar";
 import "./notification";
+import "./calendar";
 
 require("@rails/ujs").start()
 
