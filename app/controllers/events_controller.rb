@@ -1,12 +1,12 @@
 class EventsController < ApplicationController
-
   before_action :authenticate_user!
 
   def index
-    @date = Date.parse(params[:date]) rescue Time.current.to_date
-    start_date = @date.beginning_of_month.beginning_of_week
-    end_date = @date.end_of_month.end_of_week
-    @days = (start_date..end_date).to_a
+    @calendar_month = CalendarMonth.new(params[:year], params[:month])
+  end
+
+  def show
+    # TODO
   end
 
   def new
@@ -16,10 +16,22 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params.merge(user: current_user))
     if @event.save
-      redirect_to(events_path, notice: t('.notice'))
+      redirect_back(fallback_location: events_path, notice: t('.notice'))
     else
       render 'new'
     end
+  end
+
+  def edit
+    # TODO
+  end
+
+  def update
+    # TODO
+  end
+
+  def destroy
+    # TODO
   end
 
   private
@@ -27,5 +39,4 @@ class EventsController < ApplicationController
   def event_params
     params.require(:event).permit(:title, :start_date, :periodicity)
   end
-
 end

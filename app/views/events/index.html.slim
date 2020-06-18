@@ -3,26 +3,35 @@
     .level-item
       .field.has-addons.js-calendar-date-selector
         .control
-          = link_to events_path(date: @date - 1.month), class: 'button' do
+          = link_to month_events_path(year: @calendar_month.previous.year, month: @calendar_month.previous.month),
+                  class: 'button' do
             span.icon
               i.fas.fa-chevron-left
         .control
           .select
-            = select_month(@date)
+            = select_month(@calendar_month.month_date)
         .control
           .select
-            = select_year(@date)
+            = select_year(@calendar_month.month_date)
         .control
-          = link_to events_path(date: @date + 1.month), class: 'button' do
+          = link_to month_events_path(year: @calendar_month.next.year, month: @calendar_month.next.month),
+                  class: 'button' do
             span.icon
               i.fas.fa-chevron-right
   .level-right
     .level-item
       = link_to t('.add'), new_event_path, class: 'button is-primary'
 
-- @days.each_slice(7) do |week|
-  .columns
+- @calendar_month.days.each_slice(7) do |week|
+  .tile.is-ancestor
     - week.each do |day|
-      .column
-        .box
-          .has-text-centered= l day, format: :short
+      .tile.is-parent
+        .tile.is-child.panel
+          .panel-heading
+            .has-text-centered= l day.date, format: "%a"
+            .has-text-centered= l day.date, format: :long
+          - day.events.each do |event|
+            - if event.user == current_user
+              = link_to event.title, edit_event_path(event), class: 'panel-block'
+            - else
+              = link_to event.title, event_path(event), class: 'panel-block'

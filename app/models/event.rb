@@ -27,6 +27,7 @@ class Event < ApplicationRecord
   validates :start_date, presence: true
   validates :periodicity, presence: true
 
-  enumerize :periodicity, in: [:once, :daily, :weekly, :monthly, :yearly], default: :once
+  enumerize :periodicity, in: %i[once daily weekly monthly yearly], default: :once,
+                          scope: true, predicates: true
 
 end

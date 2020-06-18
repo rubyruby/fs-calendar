@@ -20,5 +20,5 @@ function addSelectorChangeListeners(dateSelector) {
 }
 
 function redirectToEvents(year, month) {
-  window.location.replace(`/events?date=${year}-${month}-01`)
+  window.location.replace(`/events/${year}/${month}`);
 }
