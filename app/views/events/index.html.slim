@@ -26,7 +26,7 @@
   .tile.is-ancestor
     - week.each do |day|
       .tile.is-parent
-        .tile.is-child.panel
+        .tile.is-child.panel class=(day.date == Date.today && 'is-info')
           .panel-heading
             .has-text-centered= l day.date, format: "%a"
             .has-text-centered= l day.date, format: :long
