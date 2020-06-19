@@ -6,32 +6,39 @@ class EventsController < ApplicationController
   end
 
   def show
-    # TODO
+    @event = Event.find(params[:id])
   end
 
   def new
-    @event = Event.new(start_date: Time.current.to_date)
+    @event = Event.new(start_date: Date.today)
   end
 
   def create
     @event = Event.new(event_params.merge(user: current_user))
     if @event.save
-      redirect_back(fallback_location: events_path, notice: t('.notice'))
+      redirect_to events_path, notice: t('.notice')
     else
       render 'new'
     end
   end
 
   def edit
-    # TODO
+    @event = current_user.events.find(params[:id])
   end
 
   def update
-    # TODO
+    @event = current_user.events.find(params[:id])
+    if @event.update(event_params)
+      redirect_to events_path, notice: t('.notice')
+    else
+      render 'edit'
+    end
   end
 
   def destroy
-    # TODO
+    event = current_user.events.find(params[:id])
+    event.destroy
+    redirect_to events_path, notice: t('.notice')
   end
 
   private

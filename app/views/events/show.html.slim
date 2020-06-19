@@ -1,0 +1,5 @@
+.columns.is-centered
+  .column.is-narrow
+    .box
+      .title= @event.title
+      .mt-4= t('.description', periodicity: @event.periodicity, start_date: l(@event.start_date, format: :long))

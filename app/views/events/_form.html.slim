@@ -1,28 +1,42 @@
-= form_for @event do |f|
+.columns.is-centered
+  .column.is-narrow
+    .box
+      h1.title
+        = title
+      hr
 
-  = form_field(@event, :title) do |field_class|
-    = f.text_field :title, class: ['input', field_class]
+      = form_for event do |f|
 
-  = form_field(@event, :start_date) do |field_class|
-    .field.has-addons.has-addons-fullwidth
-      .control
-        .select.is-fullwidth
-          = select_year @event.start_date, {}, name: "event[start_date(1i)]", class: field_class
-      .control
-        .select.is-fullwidth
-          = select_month @event.start_date, {}, name: "event[start_date(2i)]", class: field_class
-      .control
-        .select.is-fullwidth
-          = select_day @event.start_date, {}, name: "event[start_date(3i)]", class: field_class
+        = form_field(event, :title) do |field_class|
+          = f.text_field :title, class: ['input', field_class]
+
+        = form_field(event, :start_date) do |field_class|
+          .field
+            .control
+              .select
+                = select_year event.start_date, {}, name: "event[start_date(1i)]", class: field_class
+          .field
+            .control
+              .select
+                = select_month event.start_date, {}, name: "event[start_date(2i)]", class: field_class
+          .field
+            .control
+              .select
+                = select_day event.start_date, {}, name: "event[start_date(3i)]", class: field_class
 
 
-  = form_field(@event, :periodicity) do |field_class|
-    .select.is-fullwidth
-      = f.select :periodicity, Event.periodicity.options, class: field_class
+        = form_field(event, :periodicity) do |field_class|
+          .select.is-fullwidth
+            = f.select :periodicity, Event.periodicity.options, class: field_class
 
-  hr
-  .field.is-grouped.is-grouped-right
-    .control
-      = link_to t('shared.back'), :back, class: "button"
-    .control
-      = f.submit t('.save'), class: "button is-primary"
+        hr
+          - if event.persisted?
+            = link_to event_path, class: 'button is-danger is-outlined is-pulled-left', title: t('.remove'),
+                    method: :delete, 'data-confirm' => t('.are_you_sure') do
+              span.icon.is-small
+                i.fas.fa-times
+        .field.is-grouped.is-grouped-right
+          .control
+            = link_to t('.back'), :back, class: "button"
+          .control
+            = f.submit t('.save'), class: "button is-primary"

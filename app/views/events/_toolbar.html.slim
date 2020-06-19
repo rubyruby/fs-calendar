@@ -1,0 +1,23 @@
+.level
+  .level-left
+    .level-item
+      .field.has-addons.js-calendar-date-selector
+        .control
+          = link_to month_events_path(year: calendar_month.previous.year, month: calendar_month.previous.month),
+                  class: 'button' do
+            span.icon
+              i.fas.fa-chevron-left
+        .control
+          .select
+            = select_month(calendar_month.month_date)
+        .control
+          .select
+            = select_year(calendar_month.month_date)
+        .control
+          = link_to month_events_path(year: calendar_month.next.year, month: calendar_month.next.month),
+                  class: 'button' do
+            span.icon
+              i.fas.fa-chevron-right
+  .level-right
+    .level-item
+      = link_to t('.add'), new_event_path, class: 'button is-primary'

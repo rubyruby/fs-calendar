@@ -1,20 +1,28 @@
 en:
 
-  shared:
-    back: Back
-
   layouts:
     navbar:
       calendar: Calendar
 
   events:
     index:
-      add: Add event
+      no_events: No events
     new:
       title: New event
+    edit:
+      title: Edit event
     form:
+      back: Back
       save: Save
+      remove: Remove event
+      are_you_sure: Are you sure?
     create:
-      notice: "Event created."
+      notice: Event created.
     update:
-      notice: "Event updated."
+      notice: Event updated.
+    destroy:
+      notice: Event removed.
+    show:
+      description: 'Event %{periodicity}, starts at %{start_date}'
+    toolbar:
+      add: Add event

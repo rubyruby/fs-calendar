@@ -7,7 +7,7 @@ nav.navbar.is-light[aria-label="main navigation" role="navigation"]
     - if user_signed_in?
       .navbar-start
         = link_to t('.calendar'), events_path,
-                class: ['navbar-item', controller_name == 'events' && 'is-active']
+                class: ['navbar-item', ('is-active' if controller_name == 'events')]
     .navbar-end
       - if user_signed_in?
         .navbar-item.has-dropdown
@@ -19,6 +19,6 @@ nav.navbar.is-light[aria-label="main navigation" role="navigation"]
                     class: 'navbar-item', method: :delete
       - else
         = link_to t("devise.shared.links.sign_in"), new_user_session_path,
-                class: ['navbar-item', controller_name == 'sessions' && 'is-active']
+                class: ['navbar-item', ('is-active' if controller_name == 'sessions')]
         = link_to t("devise.shared.links.sign_up"), new_user_registration_path,
-                class: ['navbar-item', controller_name == 'registrations' && 'is-active']
+                class: ['navbar-item', ('is-active' if controller_name == 'registrations')]

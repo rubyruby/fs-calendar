@@ -9,7 +9,7 @@ class CalendarMonth
   def days
     (start_date..end_date).map do |date|
       events_in_date = once_events(date) +
-                       daily_events +
+                       daily_events(date) +
                        weekly_events(date) +
                        monthly_events(date) +
                        yearly_events(date)
@@ -41,21 +41,22 @@ class CalendarMonth
     events.select { |event| event.once? && event.start_date == date }
   end
 
-  def daily_events
-    events.select(&:daily?)
+  def daily_events(date)
+    events.select { |event| event.daily? && event.start_date <= date }
   end
 
   def weekly_events(date)
-    events.select { |event| event.weekly? && event.start_date.wday == date.wday }
+    events.select { |event| event.weekly? && event.start_date.wday == date.wday && event.start_date <= date }
   end
 
   def monthly_events(date)
-    events.select { |event| event.monthly? && event.start_date.day == date.day }
+    events.select { |event| event.monthly? && event.start_date.day == date.day && event.start_date <= date }
   end
 
   def yearly_events(date)
     events.select do |event|
-      event.yearly? && event.start_date.day == date.day && event.start_date.month == date.month
+      event.yearly? && event.start_date.day == date.day &&
+        event.start_date.month == date.month && event.start_date <= date
     end
   end
 

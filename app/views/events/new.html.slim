@@ -1,6 +1,1 @@
-.columns.is-centered
-  .column.is-narrow
-    .box
-      h1.title= t(".title")
-      hr
-      = render 'form'
+= render 'form', event: @event, title: t(".title")
