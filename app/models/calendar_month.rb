@@ -61,7 +61,7 @@ class CalendarMonth
   end
 
   def events
-    @events ||= MonthEventsQuery.call(start_date: start_date, end_date: end_date)
+    @events ||= EventsByPeriodQuery.call(start_date: start_date, end_date: end_date)
   end
 
   def start_date

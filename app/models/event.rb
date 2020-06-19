@@ -30,4 +30,6 @@ class Event < ApplicationRecord
   enumerize :periodicity, in: %i[once daily weekly monthly yearly], default: :once,
                           scope: true, predicates: true
 
+  scope :by_user, ->(user) { where(user: user) }
+
 end

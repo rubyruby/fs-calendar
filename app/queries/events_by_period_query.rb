@@ -1,4 +1,4 @@
-class MonthEventsQuery
+class EventsByPeriodQuery
 
   def self.call(relation = Event.all, start_date:, end_date:)
     events = relation.where('events.start_date <= ?', end_date)
