@@ -2,7 +2,12 @@ class EventsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @calendar_month = CalendarMonth.new(params[:year], params[:month], current_user)
+  end
+
+  def all
     @calendar_month = CalendarMonth.new(params[:year], params[:month])
+    render 'index'
   end
 
   def show

@@ -26,3 +26,5 @@ en:
       description: 'Event %{periodicity}, starts at %{start_date}'
     toolbar:
       add: Add event
+      mine: My events
+      all: All events

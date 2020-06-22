@@ -1,10 +1,9 @@
 .level
   .level-left
     .level-item
-      .field.has-addons.js-calendar-date-selector
+      .field.has-addons.js-calendar-date-selector[data-user-events-only=calendar_month.user.present?]
         .control
-          = link_to month_events_path(year: calendar_month.previous.year, month: calendar_month.previous.month),
-                  class: 'button' do
+          = link_to previous_month_events_path(calendar_month), class: 'button' do
             span.icon
               i.fas.fa-chevron-left
         .control
@@ -14,10 +13,16 @@
           .select
             = select_year(calendar_month.month_date)
         .control
-          = link_to month_events_path(year: calendar_month.next.year, month: calendar_month.next.month),
-                  class: 'button' do
+          = link_to next_month_events_path(calendar_month), class: 'button' do
             span.icon
               i.fas.fa-chevron-right
+    .level-item
+      .tabs.is-toggle.is-toggle-rounded
+        ul
+          li class=('is-active' if calendar_month.user)
+            = link_to t('.mine'), my_month_events_path(year: calendar_month.year, month: calendar_month.month)
+          li class=('is-active' unless calendar_month.user)
+            = link_to t('.all'), all_month_events_path(year: calendar_month.year, month: calendar_month.month)
   .level-right
     .level-item
       = link_to t('.add'), new_event_path, class: 'button is-primary'

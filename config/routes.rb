@@ -11,7 +11,10 @@ Rails.application.routes.draw do
   end
 
   resources :events do
-    get '/:year/:month', on: :collection, action: :index, as: :month, constraints: { year: /\d+/, month: /\d+/ }
+    collection do
+      get '/:year/:month/all', action: :all, as: :all_month, constraints: { year: /\d+/, month: /\d+/ }
+      get '/:year/:month', action: :index, as: :my_month, constraints: { year: /\d+/, month: /\d+/ }
+    end
   end
 
   root to: 'events#index'

@@ -1,8 +1,9 @@
 class CalendarMonth
 
-  attr_reader :month_date
+  attr_reader :month_date, :user
 
-  def initialize(year, month)
+  def initialize(year, month, user = nil)
+    @user = user
     @month_date = build_month_date(year, month)
   end
 
@@ -27,12 +28,12 @@ class CalendarMonth
 
   def previous
     previous_date = month_date - 1.month
-    CalendarMonth.new(previous_date.year, previous_date.month)
+    CalendarMonth.new(previous_date.year, previous_date.month, user)
   end
 
   def next
     next_date = month_date + 1.month
-    CalendarMonth.new(next_date.year, next_date.month)
+    CalendarMonth.new(next_date.year, next_date.month, user)
   end
 
   private
@@ -60,8 +61,12 @@ class CalendarMonth
     end
   end
 
+  def events_relation
+    user ? Event.by_user(user) : Event.all
+  end
+
   def events
-    @events ||= EventsByPeriodQuery.call(start_date: start_date, end_date: end_date)
+    @events ||= EventsByPeriodQuery.call(events_relation, start_date: start_date, end_date: end_date)
   end
 
   def start_date
