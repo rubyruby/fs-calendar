@@ -1,6 +1,7 @@
 class CalendarMonth
 
   attr_reader :month_date, :user
+  delegate :year, :month, to: :month_date
 
   def initialize(year, month, user = nil)
     @user = user
@@ -16,14 +17,6 @@ class CalendarMonth
                        yearly_events(date)
       CalendarDay.new(date, events_in_date)
     end
-  end
-
-  def year
-    month_date.year
-  end
-
-  def month
-    month_date.month
   end
 
   def previous
@@ -62,7 +55,7 @@ class CalendarMonth
   end
 
   def events_relation
-    user ? Event.by_user(user) : Event.all
+    (user ? Event.by_user(user) : Event.all).includes(:user)
   end
 
   def events
