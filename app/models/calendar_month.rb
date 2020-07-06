@@ -10,11 +10,11 @@ class CalendarMonth
 
   def days
     (start_date..end_date).map do |date|
-      events_in_date = once_events(date) +
-                       daily_events(date) +
-                       weekly_events(date) +
-                       monthly_events(date) +
-                       yearly_events(date)
+      events_in_date = EventsByDateFilter.once_events(events, date) +
+                       EventsByDateFilter.daily_events(events, date) +
+                       EventsByDateFilter.weekly_events(events, date) +
+                       EventsByDateFilter.monthly_events(events, date) +
+                       EventsByDateFilter.yearly_events(events, date)
       CalendarDay.new(date, events_in_date)
     end
   end
@@ -30,29 +30,6 @@ class CalendarMonth
   end
 
   private
-
-  def once_events(date)
-    events.select { |event| event.once? && event.start_date == date }
-  end
-
-  def daily_events(date)
-    events.select { |event| event.daily? && event.start_date <= date }
-  end
-
-  def weekly_events(date)
-    events.select { |event| event.weekly? && event.start_date.wday == date.wday && event.start_date <= date }
-  end
-
-  def monthly_events(date)
-    events.select { |event| event.monthly? && event.start_date.day == date.day && event.start_date <= date }
-  end
-
-  def yearly_events(date)
-    events.select do |event|
-      event.yearly? && event.start_date.day == date.day &&
-        event.start_date.month == date.month && event.start_date <= date
-    end
-  end
 
   def events_relation
     (user ? Event.by_user(user) : Event.all).includes(:user)
