@@ -1,6 +1,7 @@
 FactoryBot.define do
 
   factory :event do
+
     user
     title { FFaker::Lorem.sentence }
     start_date { Date.today + rand(-100..100).days }
@@ -11,6 +12,11 @@ FactoryBot.define do
         periodicity { period }
       end
     end
+
+    trait :invalid do
+      title { nil }
+    end
+
   end
 
 end
