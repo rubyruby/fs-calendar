@@ -40,4 +40,8 @@ group :test do
   gem 'simplecov', require: false
   gem 'factory_bot_rails'
   gem 'shoulda-matchers'
+  gem 'capybara'
+  gem 'capybara-screenshot'
+  gem 'selenium-webdriver'
+  gem 'webdrivers', '~> 4.0'
 end
