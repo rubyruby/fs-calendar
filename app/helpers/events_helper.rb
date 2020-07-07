@@ -18,4 +18,8 @@ module EventsHelper
     end
   end
 
+  def day_dom_id(day)
+    "day_#{day.date.strftime('%Y_%m_%d')}"
+  end
+
 end

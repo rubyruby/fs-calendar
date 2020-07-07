@@ -4,16 +4,18 @@
   .tile.is-ancestor
     - week.each do |day|
       .tile.is-parent class=('is-hidden-mobile' if day.date.month != @calendar_month.month)
-        .tile.is-child.panel class=('is-info' if day.date == Date.today)
+        .tile.is-child.panel class=('is-info' if day.date == Date.today) id=day_dom_id(day)
           .panel-heading
             .has-text-centered= l day.date, format: "%a"
             .has-text-centered= l day.date, format: :long
           - if day.events.size > 0
             - day.events.each do |event|
               - if event.user == current_user
-                = link_to event.title, edit_event_path(event), class: 'panel-block has-text-info-dark'
+                = link_to event.title, edit_event_path(event),
+                        class: 'panel-block has-text-info-dark', id: dom_id(event, day_dom_id(day))
               - else
-                = link_to event.title, event_path(event), class: 'panel-block has-text-grey'
+                = link_to event.title, event_path(event),
+                        class: 'panel-block has-text-grey', id: dom_id(event, day_dom_id(day))
           - else
             .panel-block= t('.no_events')
 

@@ -8,7 +8,7 @@ class EventsByPeriodQuery
       .or(events.with_periodicity(:daily))
       .or(events.with_periodicity(:once).where(start_date: (start_date..end_date)))
       .or(events.with_periodicity(:yearly)
-            .where("date_part('doy', events.start_date) BETWEEN ? AND ?", start_date.yday, end_date.yday))
+            .where("to_char(events.start_date, 'MMDD') IN (?)", (start_date..end_date).map { |d| d.strftime('%m%d') }))
   end
 
 end

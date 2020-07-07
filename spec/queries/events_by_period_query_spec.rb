@@ -20,21 +20,21 @@ RSpec.describe EventsByPeriodQuery do
       3.times.map { create(:event, :daily, start_date: end_date - rand(0..1000).days) }
     end
     let!(:daily_events_outside_period) do
-      3.times.map { create(:event, :daily, start_date: end_date + rand(0..1000).days) }
+      3.times.map { create(:event, :daily, start_date: end_date + rand(1..1000).days) }
     end
 
     let!(:weekly_events_inside_period) do
       3.times.map { create(:event, :weekly, start_date: end_date - rand(0..1000).days) }
     end
     let!(:weekly_events_outside_period) do
-      3.times.map { create(:event, :weekly, start_date: end_date + rand(0..1000).days) }
+      3.times.map { create(:event, :weekly, start_date: end_date + rand(1..1000).days) }
     end
 
     let!(:monthly_events_inside_period) do
       3.times.map { create(:event, :monthly, start_date: end_date - rand(0..1000).days) }
     end
     let!(:monthly_events_outside_period) do
-      3.times.map { create(:event, :monthly, start_date: end_date + rand(0..1000).days) }
+      3.times.map { create(:event, :monthly, start_date: end_date + rand(1..1000).days) }
     end
 
     let!(:yearly_events_inside_period) do
@@ -42,8 +42,8 @@ RSpec.describe EventsByPeriodQuery do
     end
     let!(:yearly_events_outside_period) do
       3.times.map { create(:event, :yearly, start_date: (start_date..end_date).to_a.sample + rand(1..5).years) } +
-        3.times.map { create(:event, :yearly, start_date: start_date - rand(1..30).days) } +
-        3.times.map { create(:event, :yearly, start_date: end_date + rand(1..30).days) }
+        3.times.map { create(:event, :yearly, start_date: start_date - rand(50..80).days) } +
+        3.times.map { create(:event, :yearly, start_date: end_date + rand(50..80).days) }
     end
 
     it 'returns relation' do

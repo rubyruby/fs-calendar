@@ -3,7 +3,7 @@ FactoryBot.define do
   factory :event do
 
     user
-    title { FFaker::Lorem.sentence }
+    sequence(:title) { |i| "#{FFaker::Lorem.sentence}-#{i}" }
     start_date { Date.today + rand(-100..100).days }
     periodicity { Event.periodicity.values.sample }
 
