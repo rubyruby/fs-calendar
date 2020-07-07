@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'User registrations', type: :feature, js: true do
+RSpec.describe 'User registration', type: :feature, js: true do
 
   let(:user_attributes) { attributes_for(:user) }
 
